@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+	"http://struts.apache.org/dtds/struts-2.3.dtd">
+
+<struts>
+
+   <!--  <constant name="struts.enable.DynamicMethodInvocation" value="true" /> -->
+    <constant name="struts.devMode" value="false" />
+    <package name="default" namespace="/" extends="struts-default">
+    	<!-- 配置使用 paramsPrepareParamsStack 作为默认的拦截器栈 -->
+		<!-- 修改 PrepareInterceptor 拦截器的 alwaysInvokePrepare 属性值为 false -->
+		<interceptors>
+		    <interceptor-stack name="WSSETTLE">
+		        <interceptor-ref name="paramsPrepareParamsStack">
+		            <param name="prepare.alwaysInvokePrepare">false</param>
+		        </interceptor-ref>
+		    </interceptor-stack>
+		</interceptors>
+		<default-interceptor-ref name="WSSETTLE"/>
+    
+		 <action name="*_*" class="com.wssettle.action.{1}" method="{2}">
+		 	<result name="input" type="redirect">login.jsp</result>
+		 	<result name="addRangesSuc" type="redirect">Achievement/SetRange.jsp</result>
+		 	<result name="addRangesFail" type="redirect">Achievement/SetRange.jsp</result>
+		 	<result name="updateRangesSuc" type="redirect">Achievement/SetRange.jsp</result>
+		 	<result name="updateRangesFail" type="redirect">Achievement/SetRange.jsp</result>
+
+		 	<result name="editagent" type="redirect">/Agent/EditAgent.jsp?active=menupage6_5</result>
+
+		</action>
+      
+    </package>
+
+ 
+
+    <!-- Add packages here -->
+
+</struts>

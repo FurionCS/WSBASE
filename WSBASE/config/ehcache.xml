@@ -1,0 +1,105 @@
+<ehcache>
+
+    <!-- Sets the path to the directory where cache .data files are created.
+
+         If the path is a Java System Property it is replaced by
+         its value in the running VM.
+
+         The following properties are translated:
+         user.home - User's home directory
+         user.dir - User's current working directory
+         java.io.tmpdir - Default temp file path -->
+  <!-- 指定一个目录当需要将数据存储到硬盘上就到这个路径 -->
+    <diskStore path="java.io.tmpdir"/>
+
+
+    <!--Default Cache configuration. These will applied to caches programmatically created through
+        the CacheManager.
+
+        The following attributes are required for defaultCache:
+
+        maxInMemory       - Sets the maximum number of objects that will be created in memory
+        eternal           - Sets whether elements are eternal. If eternal,  timeouts are ignored and the element
+                            is never expired.
+        timeToIdleSeconds - Sets the time to idle for an element before it expires. Is only used
+                            if the element is not eternal. Idle time is now - last accessed time
+        timeToLiveSeconds - Sets the time to live for an element before it expires. Is only used
+                            if the element is not eternal. TTL is now - creation time
+        overflowToDisk    - Sets whether elements can overflow to disk when the in-memory cache
+                            has reached the maxInMemory limit.
+
+        -->
+        <!-- 设置缓存默认数据过期策略 -->
+    <defaultCache
+        maxElementsInMemory="10000"
+        eternal="false"
+        timeToIdleSeconds="120"
+        timeToLiveSeconds="120"
+        overflowToDisk="true"
+        />
+
+    <!--Predefined caches.  Add your cache configuration settings here.
+        If you do not have a configuration for your cache a WARNING will be issued when the
+        CacheManager starts
+
+        The following attributes are required for defaultCache:
+
+        name              - Sets the name of the cache. This is used to identify the cache. It must be unique.
+        maxInMemory       - Sets the maximum number of objects that will be created in memory
+        eternal           - Sets whether elements are eternal. If eternal,  timeouts are ignored and the element
+                            is never expired.
+        timeToIdleSeconds - Sets the time to idle for an element before it expires. Is only used
+                            if the element is not eternal. Idle time is now - last accessed time
+        timeToLiveSeconds - Sets the time to live for an element before it expires. Is only used
+                            if the element is not eternal. TTL is now - creation time
+        overflowToDisk    - Sets whether elements can overflow to disk when the in-memory cache
+                            has reached the maxInMemory limit.
+
+        -->
+
+    <!-- Sample cache named sampleCache1
+        This cache contains a maximum in memory of 10000 elements, and will expire
+        an element if it is idle for more than 5 minutes and lives for more than
+        10 minutes.
+
+        If there are more than 10000 elements it will overflow to the
+        disk cache, which in this configuration will go to wherever java.io.tmp is
+        defined on your system. On a standard Linux system this will be /tmp"
+        -->
+       <!--  设定具体的命名缓存的数据过期策略，每个命名缓存代表一个缓存区域
+ 			  缓存区域，一个具有名称的缓存块，可以给每一个缓存设置不同的缓存策略
+   			  如果没有设置任何的缓存区域，则所有被缓存的对象都使用默认的缓存策略，
+   			 Hivernate 在不同的缓存区域保存不同的类、集合
+		   		对于类而言区域名称是全类名， 如：com.Forum.Bean.Plate
+		   		对于集合而言，区域名称是类名加属性如：com.Forum.Bean.Plate.Theme -->
+<!--    		name:缓存名字，它的取值为类的全类名或者集合的名字
+   		maxElementsInMemory：设置基于内存的缓存中可存放的对象最大数目
+   		eternal：设置对象是否为永久，true为永不过期
+   		timeToIdleSeconds：设置对象空闲最长时间，单位：秒 ，超过：对象过期
+   		值为0可无限空闲
+   		timeToLiveSeconds：设置对象生存最长时间，超过这个时间，对象过期
+   		值为0可无限存在
+   		overflowToDisk：设置基于内存的缓存中的对象数目到达上限后，是否把溢出对象写入硬盘的缓存中 -->
+   		
+    <cache name="sampleCache1"
+        maxElementsInMemory="10000"
+        eternal="false"
+        timeToIdleSeconds="300"
+        timeToLiveSeconds="600"
+        overflowToDisk="true"
+        />
+
+    <!-- Sample cache named sampleCache2
+        This cache contains 1000 elements. Elements will always be held in memory.
+        They are not expired. -->
+    <cache name="sampleCache2"
+        maxElementsInMemory="1000"
+        eternal="true"
+        timeToIdleSeconds="0"
+        timeToLiveSeconds="0"
+        overflowToDisk="false"
+        /> 
+
+    <!-- Place configuration for your caches following -->
+
+</ehcache>

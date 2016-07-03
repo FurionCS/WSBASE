@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC
+		"-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+		"http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+    <session-factory>
+       
+    
+        <!-- SQL dialect -->  
+        <property name="dialect">org.hibernate.dialect.Oracle10gDialect</property>  
+     <!--    <property name="current_session_context_class">thread</property> -->
+   		<!-- open the second-level cache   -->
+     <!--    <property name="cache.use_second_level_cache">true</property>
+        <property name="hibernate.cache.region.factory_class">org.hibernate.cache.ehcache.EhCacheRegionFactory</property>  
+      -->
+  
+        <!-- Echo all executed SQL to stdout -->  
+        <!-- <property name="show_sql">true</property>  
+        <property name="format_sql">true</property>  -->
+        <property name="hbm2ddl.auto">update</property> 
+  <!-- 
+        Drop and re-create the database schema on startup  
+      
+       	删除对象后, 使其 OID 置为 null
+       	<property name="use_identifier_rollback">true</property>
+       	<property name="hibernate.jdbc.fetch_size">100</property>
+    	设定对数据库进行批量删除，批量更新和批量插入的时候的批次大小
+    	<property name="jdbc.batch_size">30</property>-->
+    	<!--开启查询缓存-->
+    	<!-- <property name="cache.use_query_cache">true</property> -->
+    </session-factory>
+</hibernate-configuration>
