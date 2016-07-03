@@ -1,0 +1,8 @@
+/applicationContext-Bean.xml
+/applicationContext.xml
+/com
+/db.properties
+/ehcache.xml
+/hibernate.cfg.xml
+/source.properties
+/struts.xml
